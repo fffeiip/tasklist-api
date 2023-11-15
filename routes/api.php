@@ -24,3 +24,4 @@ Route::post('token', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->resource('/user/tasks',TaskController::class)->only(['index','store','update','destroy']);
 // Route::options('user/tasks');
+Route::get('teste', [TaskController::class, 'teste']);

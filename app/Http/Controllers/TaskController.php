@@ -6,6 +6,7 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
@@ -34,6 +35,20 @@ class TaskController extends Controller
         $task->user_id = Auth::id();
         $task->save();
         return response()->json(['message' => 'Task created sucessfully', 'task' => $task], 201);
+    }
+
+    public function teste(Request $request)
+    {
+        $filename = 'carteira_escola_old.png';
+        $path = storage_path('app/public/images/' . $filename);
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        $file = file_get_contents($path);
+        $type = mime_content_type($path);
+        $poster_path = Storage::disk('s3')->put('carteira_escola.png',$file);
+        // return response($file)->header('Content-Type', $type);
     }
 
     public function update(TaskRequest $request, $id)
