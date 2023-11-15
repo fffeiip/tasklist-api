@@ -7,6 +7,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class TaskController extends Controller
 {
@@ -49,6 +50,12 @@ class TaskController extends Controller
         $type = mime_content_type($path);
         $poster_path = Storage::disk('s3')->put('carteira_escola.png',$file);
         // return response($file)->header('Content-Type', $type);
+    }
+
+    public function teste2(Request $request)
+    {
+       return Http::get('https://www.bing.com');
+
     }
 
     public function update(TaskRequest $request, $id)
