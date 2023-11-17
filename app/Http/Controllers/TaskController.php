@@ -38,26 +38,6 @@ class TaskController extends Controller
         return response()->json(['message' => 'Task created sucessfully', 'task' => $task], 201);
     }
 
-    public function teste(Request $request)
-    {
-        $filename = 'carteira_escola_old.png';
-        $path = storage_path('app/public/images/' . $filename);
-        if (!file_exists($path)) {
-            abort(404);
-        }
-
-        $file = file_get_contents($path);
-        $type = mime_content_type($path);
-        $poster_path = Storage::disk('s3')->put('carteira_escola.png',$file);
-        // return response($file)->header('Content-Type', $type);
-    }
-
-    public function teste2(Request $request)
-    {
-       return Http::get('https://www.bing.com');
-
-    }
-
     public function update(TaskRequest $request, $id)
     {
         $task = Task::find($id);
