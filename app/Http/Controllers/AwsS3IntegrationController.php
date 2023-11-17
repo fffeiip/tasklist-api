@@ -20,6 +20,7 @@ class AwsS3IntegrationController extends Controller
         Storage::disk('s3')->put('scramble3.png',$file);
         $file_size = Storage::disk('s3')->size('scramble3.png');
         $poster_path = Storage::disk('s3')->url('scramble3.png');
+        event(new FileUploadedToS3($poster_path,$file_size));
         return response()->json(['message' => "success",'file'=>['size_bytes'=>$file_size, 'path'=>$poster_path]], 201);
     }
     

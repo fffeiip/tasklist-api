@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\AwsS3IntegrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,4 @@ Route::post('token', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->resource('/user/tasks',TaskController::class)->only(['index','store','update','destroy']);
 
 
-Route::get('teste', [TaskController::class, 'teste']);
-Route::get('teste2', [TaskController::class, 'teste2']);
+Route::get('teste', [AwsS3IntegrationController::class, 'uploadFile']);
